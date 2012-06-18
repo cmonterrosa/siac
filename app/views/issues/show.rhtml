@@ -45,6 +45,7 @@
 <%= call_hook(:view_issues_show_details_bottom, :issue => @issue) %>
 
 <!-- mostramos area -->
+<% if @issue.area %>
 <tr>
   <th class="category">
     Área
@@ -53,6 +54,7 @@
     <%=@issue.area.full_descripcion%>
   </td>
 </tr>
+<%end%>
 
 </table>
 
