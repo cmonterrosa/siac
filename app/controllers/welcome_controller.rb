@@ -21,6 +21,7 @@ class WelcomeController < ApplicationController
   def index
     @news = News.latest User.current
     @projects = Project.latest User.current
+    redirect_back_or_default :controller => 'my', :action => 'page'
   end
   
   def robots
