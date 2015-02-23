@@ -56,6 +56,26 @@
 </tr>
 <%end%>
 
+
+
+<%if @calificacion = Calificacion.find(:first, :conditions => ["issue_id = ?", @issue])%>
+  <tr>
+    <th>Calificación en escala de 1 a 10:</th><td><%=h ((@calificacion.calificacion.to_f / 5.to_f * 10.0))%></td>
+    <th>Desde dirección IP:</th><td><%=h @calificacion.direccion_ip%></td>
+  </tr>
+
+  <!-- Observaciones -->
+  <tr>
+    <th>Observaciones en calificación:</th>
+    <td colspan="3"><%=h @calificacion.observaciones%></td>
+  </tr>
+<%end%>
+
+
+
+
+
+
 </table>
 
 <% if @issue.description? || @issue.attachments.any? -%>
