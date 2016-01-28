@@ -46,7 +46,14 @@ class MyController < ApplicationController
   # Show user's page
   def page
     @user = User.current
+    callcenter = Role.find_by_name("call center")
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT
+    if @member =  Member.find_by_user_id(@user)
+       if @member.roles.include?(callcenter)
+          ddit = Project.find(:first, :conditions => ["parent_id IS NULL"])
+          redirect_to :controller => "issues", :action => "new", :project_id => ddit
+       end
+    end
   end
 
   # Edit user's account
