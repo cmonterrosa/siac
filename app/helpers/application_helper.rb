@@ -559,7 +559,13 @@ module ApplicationHelper
               wiki_page_id = page.present? ? Wiki.titleize(page) : nil
               url_for(:only_path => only_path, :controller => 'wiki', :action => 'show', :project_id => link_project, :id => wiki_page_id, :anchor => anchor)
             end
-          link_to((title || page), url, :class => ('wiki-page' + (wiki_page ? '' : ' new')))
+
+          # LINK ANTERIOR
+          #link_to((title || page), url, :class => ('wiki-page' + (wiki_page ? '' : ' new')))
+            link_to_remote((title || page), :update => 'sidebar', :url => url, :method => :get, :class => ('wiki-page' + (wiki_page ? '' : ' new')))
+
+
+
         else
           # project or wiki doesn't exist
           all
