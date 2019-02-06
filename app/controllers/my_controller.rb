@@ -43,16 +43,24 @@ class MyController < ApplicationController
     render :action => 'page'
   end
 
-  # Show user's page
+  # pagina personalizada de inicio para callcenter
   def page
     @user = User.current
     callcenter = Role.find_by_name("call center")
     @blocks = @user.pref[:my_page_layout] || DEFAULT_LAYOUT
-    if @member =  Member.find_by_user_id(@user)
-       if @member.roles.include?(callcenter)
-          ddit = Project.find(:first, :conditions => ["parent_id IS NULL"])
-          redirect_to :controller => "issues", :action => "new", :project_id => ddit
-       end
+    ddit = nil
+    #---------------------------------------------------------
+    #if @member =  Member.find_by_user_id(@user)
+    if @member = Member.find_all_by_user_id(@user)
+      @member.each do |m|
+        if m.roles.include?(callcenter) 
+          #ddit = Project.find(:first, :conditions => ["parent_id IS NULL"])
+          ddit = m.project_id        
+        end             
+      end
+      if ddit
+        redirect_to :controller => "issues", :action => "new", :project_id => ddit        
+      end
     end
   end
 
