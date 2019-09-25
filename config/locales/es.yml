@@ -501,6 +501,7 @@ es:
   label_latest_revision_plural: Últimas revisiones
   label_ldap_authentication: Autenticación LDAP
   label_less_than_ago: hace menos de
+  label_between: Rango de fechas
   label_list: Lista
   label_loading: Cargando...
   label_logged_as: Conectado como
